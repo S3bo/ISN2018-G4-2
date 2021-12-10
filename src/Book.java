@@ -6,14 +6,18 @@ class Book {
     String publisher;
     String isbn;
 
-    Book(String bookTitle, String bookAuthor, int bookRelease,
-         int bookPages, String bookPublisher, String bookIsbn) {
-        title = bookTitle;
-        author = bookAuthor;
-        releaseDate = bookRelease;
-        pages = bookPages;
-        publisher = bookPublisher;
-        isbn = bookIsbn;
+    Book(String title, String author, int releaseDate,
+         int pages, String publisher, String isbn) {
+        this(title, author, releaseDate, pages, publisher);
+        this.isbn = isbn;
+    }
+
+    Book(String title, String author, int releaseDate, int pages, String publisher) {
+        this.title = title;
+        this.author = author;
+        this.releaseDate = releaseDate;
+        this.pages = pages;
+        this.publisher = publisher;
     }
 
     void printInfo() {
@@ -21,4 +25,5 @@ class Book {
                 + pages + "; " + publisher + "; " + isbn;
         System.out.println(info);
     }
+
 }
