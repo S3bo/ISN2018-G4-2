@@ -2,13 +2,10 @@ package pl.javastart.library.io;
 
 import pl.javastart.library.model.Book;
 
-
-//Sprawdzenie commita
-
 import java.util.Scanner;
 
 public class DataReader {
-    private final Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     public void close() {
         sc.close();
