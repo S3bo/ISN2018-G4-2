@@ -1,8 +1,10 @@
 package pl.javastart.library.model;
 
+import pl.javastart.library.io.file.SerializableFileManager;
+
 import java.util.Objects;
 
-public abstract class Publication {
+public abstract class Publication extends SerializableFileManager {
     private String title;
     private String publisher;
     private int year;

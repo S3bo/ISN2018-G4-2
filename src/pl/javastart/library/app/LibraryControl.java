@@ -1,8 +1,12 @@
 package pl.javastart.library.app;
 
+import pl.javastart.library.exception.DataExportException;
+import pl.javastart.library.exception.DataImportException;
 import pl.javastart.library.exception.NoSuchOptionException;
 import pl.javastart.library.io.ConsolePrinter;
 import pl.javastart.library.io.DataReader;
+import pl.javastart.library.io.file.FileManager;
+import pl.javastart.library.io.file.FileManagerBuilder;
 import pl.javastart.library.model.Book;
 import pl.javastart.library.model.Library;
 import pl.javastart.library.model.Magazine;
@@ -13,8 +17,21 @@ import java.util.InputMismatchException;
 class LibraryControl {
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
+    private FileManager fileManager;
 
-    private Library library = new Library();
+    private Library library;
+
+     LibraryControl() {
+        fileManager = new FileManagerBuilder(printer, dataReader).build();
+        try {
+            library = fileManager.importData();
+            printer.printLine("Zaimportowano dane z pliku");
+        } catch (DataImportException e) {
+            printer.printLine(e.getMessage());
+            printer.printLine("Zainicjowano nową bazę.");
+            library = new Library();
+        }
+    }
 
     void controlLoop() {
         Option option;
@@ -101,9 +118,14 @@ class LibraryControl {
     }
 
     private void exit() {
-        printer.printLine("Koniec programu, papa!");
-        // zamykamy strumień wejścia
+        try {
+            fileManager.exportData(library);
+            printer.printLine("Export danych do pliku zakończony powodzeniem");
+        } catch (DataExportException e) {
+            printer.printLine(e.getMessage());
+        }
         dataReader.close();
+        printer.printLine("Koniec programu, papa!");
     }
 
     private enum Option {
@@ -120,6 +142,9 @@ class LibraryControl {
             this.value = value;
             this.description = desc;
         }
+
+
+
 
         @Override
         public String toString() {
