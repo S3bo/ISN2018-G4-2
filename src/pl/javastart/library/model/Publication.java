@@ -5,6 +5,10 @@ import pl.javastart.library.io.file.SerializableFileManager;
 import java.util.Objects;
 
 public abstract class Publication extends SerializableFileManager {
+
+    public abstract String toCSV();
+
+
     private String title;
     private String publisher;
     private int year;

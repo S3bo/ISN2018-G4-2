@@ -2,6 +2,7 @@ package pl.javastart.library.app;
 
 import pl.javastart.library.exception.DataExportException;
 import pl.javastart.library.exception.DataImportException;
+import pl.javastart.library.exception.InvalidDataException;
 import pl.javastart.library.exception.NoSuchOptionException;
 import pl.javastart.library.io.ConsolePrinter;
 import pl.javastart.library.io.DataReader;
@@ -21,12 +22,12 @@ class LibraryControl {
 
     private Library library;
 
-     LibraryControl() {
+    LibraryControl() {
         fileManager = new FileManagerBuilder(printer, dataReader).build();
         try {
             library = fileManager.importData();
-            printer.printLine("Zaimportowano dane z pliku");
-        } catch (DataImportException e) {
+            printer.printLine("Zaimportowane dane z pliku");
+        } catch (DataImportException | InvalidDataException e) {
             printer.printLine(e.getMessage());
             printer.printLine("Zainicjowano nową bazę.");
             library = new Library();
@@ -88,7 +89,7 @@ class LibraryControl {
     private void addBook() {
         try {
             Book book = dataReader.readAndCreateBook();
-            library.addBook(book);
+            library.addPublication(book);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się utworzyć książki, niepoprawne dane");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -104,7 +105,7 @@ class LibraryControl {
     private void addMagazine() {
         try {
             Magazine magazine = dataReader.readAndCreateMagazine();
-            library.addMagazine(magazine);
+            library.addPublication(magazine);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się utworzyć magazynu, niepoprawne dane");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -142,9 +143,6 @@ class LibraryControl {
             this.value = value;
             this.description = desc;
         }
-
-
-
 
         @Override
         public String toString() {
