@@ -3,6 +3,7 @@ package pl.javastart.library.io.file;
 import pl.javastart.library.exception.NoSuchFileTypeException;
 import pl.javastart.library.io.ConsolePrinter;
 import pl.javastart.library.io.DataReader;
+import pl.javastart.library.model.Publication;
 
 public class FileManagerBuilder {
     private ConsolePrinter printer;
@@ -20,7 +21,27 @@ public class FileManagerBuilder {
             case CSV:
                 return new CsvFileManager();
             case SERIAL:
-                return new SerializableFileManager();
+                return new SerializableFileManager() {
+                    @java.lang.Override
+                    public java.lang.String toString() {
+                        return null;
+                    }
+
+                    @java.lang.Override
+                    public int hashCode() {
+                        return 0;
+                    }
+
+                    @java.lang.Override
+                    public int compareTo(Publication p) {
+                        return 0;
+                    }
+
+                    @java.lang.Override
+                    public boolean equals(java.lang.Object o) {
+                        return false;
+                    }
+                };
             default:
                 throw new NoSuchFileTypeException("Nieobsługiwany typ danych");
         }

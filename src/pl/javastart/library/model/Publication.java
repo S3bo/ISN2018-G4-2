@@ -4,7 +4,7 @@ import pl.javastart.library.io.file.SerializableFileManager;
 
 import java.util.Objects;
 
-public abstract class Publication extends SerializableFileManager {
+public abstract class Publication extends SerializableFileManager implements java.lang.Comparable<Publication> {
 
     public abstract String toCSV();
 
@@ -19,7 +19,7 @@ public abstract class Publication extends SerializableFileManager {
         this.year = year;
     }
 
-    int getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -27,7 +27,7 @@ public abstract class Publication extends SerializableFileManager {
         this.year = year;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -63,5 +63,10 @@ public abstract class Publication extends SerializableFileManager {
     @Override
     public int hashCode() {
         return Objects.hash(title, publisher, year);
+    }
+
+    @Override
+    public int compareTo(Publication p) {
+        return title.compareToIgnoreCase(p.title);
     }
 }

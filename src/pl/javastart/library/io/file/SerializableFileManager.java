@@ -3,10 +3,11 @@ package pl.javastart.library.io.file;
 import pl.javastart.library.exception.DataExportException;
 import pl.javastart.library.exception.DataImportException;
 import pl.javastart.library.model.Library;
+import pl.javastart.library.model.Publication;
 
 import java.io.*;
 
-public class SerializableFileManager implements FileManager {
+public abstract class SerializableFileManager implements FileManager {
     private static final String FILE_NAME = "Library.o";
 
     @Override
@@ -36,4 +37,12 @@ public class SerializableFileManager implements FileManager {
             throw new DataImportException("Niezgodny typ danych w pliku " + FILE_NAME);
         }
     }
+
+    public abstract String toString();
+
+    public abstract boolean equals(Object o);
+
+    public abstract int hashCode();
+
+    public abstract int compareTo(Publication p);
 }
