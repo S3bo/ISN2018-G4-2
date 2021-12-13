@@ -2,7 +2,7 @@ package pl.javastart.library.model;
 
 import java.util.Objects;
 
-public class Magazine extends Publication {
+public abstract class Magazine extends Publication {
     public static final String TYPE = "Magazyn";
     private int month;
     private int day;

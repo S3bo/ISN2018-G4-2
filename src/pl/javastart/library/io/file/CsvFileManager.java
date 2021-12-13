@@ -61,7 +61,12 @@ public class CsvFileManager implements FileManager {
         String author = data[4];
         int pages = Integer.valueOf(data[5]);
         String isbn = data[6];
-        return new Book(title, author, year, pages, publisher, isbn);
+        return new Book(title, author, year, pages, publisher, isbn) {
+            @Override
+            public String toCSV() {
+                return null;
+            }
+        };
     }
 
     private Magazine createMagazine(String[] data) {
@@ -71,7 +76,12 @@ public class CsvFileManager implements FileManager {
         int month = Integer.valueOf(data[4]);
         int day = Integer.valueOf(data[5]);
         String language = data[6];
-        return new Magazine(title, publisher, language, year, month, day);
+        return new Magazine(title, publisher, language, year, month, day) {
+            @Override
+            public String toCSV() {
+                return null;
+            }
+        };
     }
 
 }

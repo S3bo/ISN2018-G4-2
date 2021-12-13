@@ -2,7 +2,7 @@ package pl.javastart.library.model;
 
 import java.util.Objects;
 
-public class Book extends Publication {
+public abstract class Book extends Publication {
     public static final String TYPE = "Książka";
 
     private String author;

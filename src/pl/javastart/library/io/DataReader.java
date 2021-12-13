@@ -39,7 +39,12 @@ public class DataReader {
         printer.printLine("Ilość stron: ");
         int pages = getInt();
 
-        return new Book(title, author, releaseDate, pages, publisher, isbn);
+        return new Book(title, author, releaseDate, pages, publisher, isbn) {
+            @Override
+            public String toCSV() {
+                return null;
+            }
+        };
     }
 
     public Magazine readAndCreateMagazine() {
@@ -56,7 +61,12 @@ public class DataReader {
         printer.printLine("Dzień: ");
         int day = getInt();
 
-        return new Magazine(title, publisher, language, year, month, day);
+        return new Magazine(title, publisher, language, year, month, day) {
+            @Override
+            public String toCSV() {
+                return null;
+            }
+        };
     }
 //sprawdzenie czy to to
     public String getString() {
